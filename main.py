@@ -1,7 +1,6 @@
 import discord
 import requests
 import json
-from discord_webhook import *
 
 tokenfile = open('token.json')
 
