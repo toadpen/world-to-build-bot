@@ -1,3 +1,4 @@
+# Version - v1.0.1
 import discord
 import requests
 import json
