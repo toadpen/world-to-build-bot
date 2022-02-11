@@ -1,4 +1,5 @@
 # World To Build Bot
+## Current Version - v1.0.1
 This is a simple bot for the game World To Build using their api to fetch some data.
 
 ### Current Commands
