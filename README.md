@@ -1,6 +1,10 @@
-# WorldToBuild Bot
+# World To Build Bot
+## Current Version - v1.0.1
+This is a simple bot for the game World To Build using their api to fetch some data.
 
 ### Current Commands
 - **wtb lookup (userid)** -- Returns user profile information
+- **wtb design (designid)** -- Returns design information
+- **wtb help** -- Returns information about the bot
 
-I hope to add more to it soon, thanks for stopping by.
+I am planning on adding more features frequently. I hope you enjoy the bot.
