@@ -51,7 +51,8 @@ async def on_message(message):
         # If the request was invalid
         if r["Success"] == False:
             embed = discord.Embed(title="Lookup", color=0xf40b0b)
-            embed.set_author(name="World To Build Bot")
+            embed.set_author(name="World To Build Bot",
+                             icon_url="https://github.com/toadpen/world-to-build-bot/blob/master/world-to-build-logo-main-300x300.png?raw=true",)
             embed.add_field(
                 name="❌Error", value="User not found.", inline=False)
             await message.reply(embed=embed)
@@ -61,7 +62,8 @@ async def on_message(message):
 
             # Embed settings
             embed = discord.Embed(title="Lookup", color=0xf40b0b)
-            embed.set_author(name="World To Build Bot")
+            embed.set_author(name="World To Build Bot",
+                             icon_url="https://github.com/toadpen/world-to-build-bot/blob/master/world-to-build-logo-main-300x300.png?raw=true")
             embed.set_thumbnail(url=r['Data']['Headshot'])
 
             # Embed fields
@@ -86,7 +88,91 @@ async def on_message(message):
                 embed.add_field(
                     name="About", value=r['Data']["Blurb"], inline=False)
 
-            # Reply to message with embed
+            embed.add_field(
+                name="Link", value="https://worldtobuild.com/user/" + userid + "/profile", inline=False)
+
             await message.reply(embed=embed)
+
+    # If the message content startswith "wtb design")
+
+    if message.content.startswith("wtb design"):
+        # Splits the message into "wtb lookup " and the assetId the user inputted
+        rawmsg = message.content
+        splitted = rawmsg.split("design ")
+        assetid = splitted[1]
+
+        # Sends a request to the WTB API for specific asset data
+        r = requests.get(
+            'https://www.worldtobuild.com/api/marketplace/GetDesignDataById?AssetID=' + assetid).json()
+
+        # If the request was invalid
+        if r["Success"] == False:
+            embed = discord.Embed(title="Design", color=0xf40b0b)
+            embed.set_author(name="World To Build Bot",
+                             icon_url="https://github.com/toadpen/world-to-build-bot/blob/master/world-to-build-logo-main-300x300.png?raw=true")
+            embed.add_field(
+                name="❌Error", value="Design not found.", inline=False)
+            await message.reply(embed=embed)
+
+        # If the request was successful
+        elif r["Success"] == True:
+
+            # Embed settings
+            embed = discord.Embed(title="Design", color=0xf40b0b)
+            embed.set_author(name="World To Build Bot",
+                             icon_url="https://github.com/toadpen/world-to-build-bot/blob/master/world-to-build-logo-main-300x300.png?raw=true")
+
+            # Embed fields
+
+            if r['Name'] == None or r['Name'] == "":
+                embed.add_field(name="Name",
+                                value="No Name", inline=False)
+            else:
+                embed.add_field(name="Name",
+                                value=r['Name'], inline=False)
+
+            if r['Description'] == None or r['Description'] == "":
+                embed.add_field(name="Description",
+                                value="No Description", inline=False)
+            else:
+                embed.add_field(name="Description",
+                                value=r['Description'], inline=False)
+
+            if r['Rating'] == None or r['Rating'] == "":
+                embed.add_field(name="Rating",
+                                value="No Rating", inline=False)
+            else:
+                embed.add_field(name="Rating",
+                                value=r['Rating'], inline=False)
+
+            embed.add_field(
+                name="Link", value="https://worldtobuild.com/community/designs/" + assetid, inline=False)
+
+        await message.reply(embed=embed)
+
+    # Help command
+
+    if message.content.startswith("wtb help"):
+        embed = discord.Embed(title="Help", color=0xf40b0b)
+        embed.set_author(name="World To Build Bot",
+                         icon_url="https://github.com/toadpen/world-to-build-bot/blob/master/world-to-build-logo-main-300x300.png?raw=true")
+        embed.add_field(
+            name="About", value="World To Build Bot is an unofficial WTB discord bot. There are currently 3 commands.", inline=False)
+
+        embed.add_field(
+            name="wtb lookup (**USERID**)", value="Returns the selected users profile data.", inline=False)
+
+        embed.add_field(
+            name="wtb design (**DESIGNID**)", value="Returns the selected designs data.", inline=False)
+
+        embed.add_field(
+            name="wtb help", value="Returns some information about the bot.", inline=False)
+
+        embed.add_field(
+            name="Github", value="https://github.com/toadpen/world-to-build-bot", inline=False)
+
+        await message.reply(embed=embed)
+
+        # Reply to message with embed
 
 client.run(token)
