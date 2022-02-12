@@ -13,3 +13,23 @@ I am planning on adding more features frequently. I hope you enjoy the bot.
 - Added wtb design and wtb help commands
 - Added a bot profile picture in the top right of its message
 - Added links to the pages for easy access to them from the bot
+
+## Announcement
+
+I am now able to host the bot 24/7, and you guys can add it to your servers without any issues hopefully. Here is the link to add it
+
+**https://discord.com/api/oauth2/authorize?client_id=940653595144106014&permissions=137439234112&scope=bot**
+
+If there are any issues, please message me on discord (vulv#8049) or join my discord server and report the bug.
+
+**https://discord.gg/KnsFUUcyu3**
+
+
+
+Please note this bot is unofficial, I am not a WTB developer.
+
+Here are links to the Official WTB website and discord.
+
+**https://worldtobuild.com**
+
+**https://discord.com/invite/HMHnznK**
