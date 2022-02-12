@@ -18,11 +18,11 @@ I am planning on adding more features frequently. I hope you enjoy the bot.
 
 I am now able to host the bot 24/7, and you guys can add it to your servers without any issues hopefully. Here is the link to add it
 
-**https://discord.com/api/oauth2/authorize?client_id=940653595144106014&permissions=137439234112&scope=bot**
+- **https://discord.com/api/oauth2/authorize?client_id=940653595144106014&permissions=137439234112&scope=bot**
 
 If there are any issues, please message me on discord (vulv#8049) or join my discord server and report the bug.
 
-**https://discord.gg/KnsFUUcyu3**
+- **https://discord.gg/KnsFUUcyu3**
 
 
 
@@ -30,6 +30,6 @@ Please note this bot is unofficial, I am not a WTB developer.
 
 Here are links to the Official WTB website and discord.
 
-**https://worldtobuild.com**
+- **https://worldtobuild.com**
 
-**https://discord.com/invite/HMHnznK**
+- **https://discord.com/invite/HMHnznK**
