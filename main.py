@@ -21,7 +21,11 @@ tokenfile = open('token.json')
 tokenjson = json.load(tokenfile)
 token = tokenjson['token']
 
-bot = commands.Bot(command_prefix='wtb ', help_command=None)
+
+intents = discord.Intents.default()
+intents.members = True
+
+bot = commands.Bot(command_prefix='wtb ', help_command=None, intents=intents)
 
 
 @bot.event
