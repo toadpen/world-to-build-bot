@@ -22,6 +22,7 @@ tokenjson = json.load(tokenfile)
 token = tokenjson['token']
 
 
+# Make sure to tick the check that says server members intent on the bot tab in the developer panel.
 intents = discord.Intents.default()
 intents.members = True
 
@@ -177,7 +178,6 @@ async def serverinfo(ctx):
 
     owner = str(ctx.guild.owner)
     id = str(ctx.guild.id)
-    region = str(ctx.guild.region)
     memberCount = str(ctx.guild.member_count)
 
     icon = str(ctx.guild.icon_url)
@@ -185,13 +185,12 @@ async def serverinfo(ctx):
     embed = discord.Embed(
         title=name + " Server Information",
         description=description,
-        color=discord.Color.orange()
+        color=0xf40b0b
     )
     embed.set_thumbnail(url=icon)
-    embed.add_field(name="Owner", value=owner, inline=True)
-    embed.add_field(name="Server ID", value=id, inline=True)
-    embed.add_field(name="Region", value=region, inline=True)
-    embed.add_field(name="Members", value=memberCount, inline=True)
+    embed.add_field(name="Owner", value=owner, inline=False)
+    embed.add_field(name="Server ID", value=id, inline=False)
+    embed.add_field(name="Members", value=memberCount, inline=False)
 
     await ctx.send(embed=embed)
 
@@ -216,6 +215,9 @@ async def _help(ctx):
 
     embed.add_field(
         name="wtb ping", value="Returns the bot latency.", inline=False)
+
+    embed.add_field(
+        name="wtb serverinfo", value="Returns some information on the server.", inline=False)
 
     embed.add_field(
         name="Github", value="https://github.com/toadpen/world-to-build-bot", inline=False)
