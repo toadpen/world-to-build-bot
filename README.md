@@ -8,7 +8,7 @@ This is a simple bot for the game World To Build using their api to fetch some d
 
 I am planning on adding more features frequently. I hope you enjoy the bot.
 
-## Current Version - v1.0.2
+## Current Version - v1.0.3
 ### Changelog 
 #### v1.0.1
 - Added wtb design and wtb help commands
@@ -16,6 +16,9 @@ I am planning on adding more features frequently. I hope you enjoy the bot.
 - Added links to the pages for easy access to them from the bot
 #### v1.0.2
 - Optimized the code with bot.command instead of startswith.
+#### v1.0.3
+- Added wtb serverinfo and ping commands (thanks to stampe99)
+- Added last online info for the user profile lookup
 
 ## Announcement
 
