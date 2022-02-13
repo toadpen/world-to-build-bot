@@ -1,8 +1,9 @@
 # Version - v1.0.2
 import discord
-from discord.ext import commands
 import requests
 import json
+from discord.ext import commands
+from datetime import datetime
 
 # If you want to run this bot yourself, you can either make a token.json
 # file and make a value called "token",
@@ -78,6 +79,16 @@ async def lookup(ctx, arg):
             embed.add_field(
                 name="About", value=r['Data']["Blurb"], inline=False)
 
+        if r['Data']["LastAccess"] == None or r['Data']["LastAccess"] == "":
+            embed.add_field(name="Last Online",
+                            value="Cannot find last online", inline=False)
+        else:
+
+            unixtime = int(r['Data']["LastAccess"])
+            normaltime = datetime.utcfromtimestamp(
+                unixtime).strftime('%Y-%m-%d %H:%M:%S')
+            embed.add_field(name="Last Online", value=normaltime, inline=False)
+
         embed.add_field(
             name="Link", value="https://worldtobuild.com/user/" + userid + "/profile", inline=False)
 
@@ -139,6 +150,19 @@ async def design(ctx, arg):
     # Reply with embed
     await ctx.reply(embed=embed)
 
+# Ping command
+
+
+@bot.command()
+async def ping(ctx):
+    ping = f" {round(bot.latency * 1000)}ms"
+
+    embed = discord.Embed(title="Bot Latency", color=0xf40b0b)
+    embed.set_author(name="World To Build Bot",
+                     icon_url="https://github.com/toadpen/world-to-build-bot/blob/master/world-to-build-logo-main-300x300.png?raw=true")
+    embed.add_field(name="Ping", value=ping, inline=False)
+    await ctx.reply(embed=embed)
+
 
 # Help command
 @bot.command(name="help")
@@ -157,6 +181,9 @@ async def _help(ctx):
 
     embed.add_field(
         name="wtb help", value="Returns some information about the bot.", inline=False)
+
+    embed.add_field(
+        name="wtb ping", value="Returns the bot latency.", inline=False)
 
     embed.add_field(
         name="Github", value="https://github.com/toadpen/world-to-build-bot", inline=False)
