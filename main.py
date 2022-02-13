@@ -166,6 +166,7 @@ async def ping(ctx):
 # serverinfo
 
 
+@bot.command()
 async def serverinfo(ctx):
     name = str(ctx.guild.name)
     description = str(ctx.guild.description)
