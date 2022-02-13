@@ -8,7 +8,7 @@ This is a simple bot for the game World To Build using their api to fetch some d
 
 I am planning on adding more features frequently. I hope you enjoy the bot.
 
-## Current Version - v1.0.1
+## Current Version - v1.0.2
 ### Changelog 
 #### v1.0.1
 - Added wtb design and wtb help commands
