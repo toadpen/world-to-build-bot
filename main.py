@@ -164,5 +164,8 @@ async def _help(ctx):
     # Reply with embed
     await ctx.reply(embed=embed)
 
-
+@bot.command()
+async def ping(ctx: commands.Context):
+    await ctx.send(f"Pong, server-wide latency is {round(bot.latency * 1000)}ms")
+    
 bot.run(token)
