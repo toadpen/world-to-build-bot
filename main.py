@@ -1,4 +1,4 @@
-# Version - v1.0.1
+# Version - v1.0.2
 import discord
 from discord.ext import commands
 import requests
