@@ -155,6 +155,82 @@ async def design(ctx, arg):
     # Reply with embed
     await ctx.reply(embed=embed)
 
+
+# World command
+@bot.command()
+async def world(ctx, arg):
+    gameid = arg
+    # Sends a request to the WTB API for a worlds data
+    r = requests.get(
+        'https://api.worldtobuild.com/GameService/FetchGameInformationById?GameId=' + gameid).json()
+
+    # If the request was invalid
+    if r["Success"] == False:
+        embed = discord.Embed(title="World", color=0xf40b0b)
+        embed.set_author(name="World To Build Bot",
+                         icon_url="https://github.com/toadpen/world-to-build-bot/blob/master/world-to-build-logo-main-300x300.png?raw=true",)
+        embed.add_field(
+            name="❌Error", value="World not found.", inline=False)
+
+        # Reply with embed
+        await ctx.reply(embed=embed)
+
+    # If the request was successful
+    elif r["Success"] == True:
+
+        # Embed settings
+        embed = discord.Embed(title="World", color=0xf40b0b)
+        embed.set_author(name="World To Build Bot",
+                         icon_url="https://github.com/toadpen/world-to-build-bot/blob/master/world-to-build-logo-main-300x300.png?raw=true")
+        embed.set_thumbnail(url=r['Data']['Thumbnail'])
+
+        # Embed fields
+
+        if r['Data']["Name"] == None or r['Data']["Name"] == "":
+            embed.add_field(name="Name",
+                            value="No Name", inline=False)
+        else:
+            embed.add_field(name="Name",
+                            value=r['Data']["Name"], inline=False)
+
+        if r['Data']["Description"] == None or r['Data']["Description"] == "":
+            embed.add_field(name="Description",
+                            value="No Description", inline=False)
+        else:
+            embed.add_field(name="Description",
+                            value=str(r['Data']["Description"]), inline=False)
+
+        if r['Data']["OwnerId"] == None or r['Data']["OwnerId"] == "":
+            embed.add_field(name="Owner", value="No Owner", inline=False)
+        else:
+
+            req = requests.get(
+                'https://worldtobuild.com/api/user/FetchProfilePreview?UserID=' + str(r['Data']['OwnerId'])).json()
+
+            embed.add_field(
+                name="Owner", value=req['Data']["UserName"], inline=False)
+
+        if r['Data']["Visits"] == None or r['Data']["Visits"] == "":
+            embed.add_field(name="Visits",
+                            value="No Visits", inline=False)
+        else:
+            embed.add_field(name="Visits",
+                            value=r['Data']['Visits'], inline=False)
+
+        if r['Data']["MaxPlayers"] == None or r['Data']["MaxPlayers"] == "":
+            embed.add_field(name="Max Players",
+                            value="0", inline=False)
+        else:
+            embed.add_field(name="Max Players",
+                            value=r['Data']['MaxPlayers'], inline=False)
+
+        embed.add_field(
+            name="Link", value="https://worldtobuild.com/worlds/" + gameid + "/play", inline=False)
+
+        # Reply with embed
+        await ctx.reply(embed=embed)
+
+
 # Ping command
 
 
