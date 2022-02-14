@@ -101,6 +101,7 @@ async def lookup(ctx, arg):
         await ctx.reply(embed=embed)
 
 
+# Design command
 @bot.command()
 async def design(ctx, arg):
 
@@ -232,8 +233,6 @@ async def world(ctx, arg):
 
 
 # Ping command
-
-
 @bot.command()
 async def ping(ctx):
     ping = f" {round(bot.latency * 1000)}ms"
@@ -244,9 +243,8 @@ async def ping(ctx):
     embed.add_field(name="Ping", value=ping, inline=False)
     await ctx.reply(embed=embed)
 
-# serverinfo
 
-
+# Serverinfo command
 @bot.command()
 async def serverinfo(ctx):
     name = str(ctx.guild.name)
