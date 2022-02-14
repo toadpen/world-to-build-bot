@@ -281,13 +281,13 @@ async def _help(ctx):
         name="About", value="World To Build Bot is an unofficial WTB discord bot. There are currently 3 commands.", inline=False)
 
     embed.add_field(
-        name="wtb lookup (**USERID**)", value="Returns the selected users profile data.", inline=False)
+        name="wtb lookup (**USERID**)", value="Returns a users profile data.", inline=False)
 
     embed.add_field(
-        name="wtb design (**DESIGNID**)", value="Returns the selected designs data.", inline=False)
+        name="wtb design (**DESIGNID**)", value="Returns a designs data.", inline=False)
 
     embed.add_field(
-        name="wtb world (**WORLDID**)", value="Returns the selected worlds data.", inline=False)
+        name="wtb world (**WORLDID**)", value="Returns a worlds data.", inline=False)
 
     embed.add_field(
         name="wtb help", value="Returns some information about the bot.", inline=False)
