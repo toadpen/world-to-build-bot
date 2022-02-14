@@ -287,6 +287,9 @@ async def _help(ctx):
         name="wtb design (**DESIGNID**)", value="Returns the selected designs data.", inline=False)
 
     embed.add_field(
+        name="wtb world (**WORLDID**)", value="Returns the selected worlds data.", inline=False)
+
+    embed.add_field(
         name="wtb help", value="Returns some information about the bot.", inline=False)
 
     embed.add_field(
