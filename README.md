@@ -6,6 +6,8 @@ This is a simple bot for the game World To Build using their api to fetch some d
 - **wtb design (designid)** -- Returns design information
 - **wtb world (worldid)** -- Returns world information
 - **wtb serverinfo** -- Returns discord server information
+- **wtb code (userid)** -- Gives you a code that you copy into your description on WTB.
+- **wtb verify (userid)** -- Verifies you on the server if your code matches your description on the WTB website.
 - **wtb ping** -- Returns bot ping
 - **wtb help** -- Returns information about the bot
 
@@ -24,6 +26,12 @@ I am planning on adding more features frequently. I hope you enjoy the bot.
 - Added last online info for the user profile lookup
 #### v1.0.4
 - Added wtb world command 
+
+
+
+#### v1.1.0
+- Added verification (wtb code and wtb verify)
+- Cleaned code and split it into multiple files.
 ## Announcement
 
 I am now able to host the bot 24/7, and you guys can add it to your servers without any issues hopefully. Here is the link to add it
