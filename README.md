@@ -30,8 +30,7 @@ I am planning on adding more features frequently. I hope you enjoy the bot.
 
 
 #### v1.1.0
-- Added verification (wtb code and wtb verify)
-- Cleaned code and split it into multiple files.
+- Updated lookup command to fetch new Profile Dedicated API
 ## Announcement
 
 I am now able to host the bot 24/7, and you guys can add it to your servers without any issues hopefully. Here is the link to add it
