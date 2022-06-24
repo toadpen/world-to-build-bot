@@ -41,13 +41,13 @@ async def lookup(ctx, arg):
     userid = arg
     # Sends a request to the WTB API for a users profile data
     r = requests.get(
-        'https://worldtobuild.com/api/user/FetchProfilePreview?UserID=' + userid).json()
+        'https://api.worldtobuild.com/WebService/Player/FetchPlayerDataById?PlayerID=' + userid).json()
 
     # If the request was invalid
     if r["Success"] == False:
         embed = discord.Embed(title="Lookup", color=0xf40b0b)
         embed.set_author(name="World To Build Bot",
-                         icon_url="https://github.com/toadpen/world-to-build-bot/blob/master/world-to-build-logo-main-300x300.png?raw=true",)
+                         icon_url="https://cdn.discordapp.com/attachments/687762794661281864/943268414196178994/bubble-spirit-red.png",)
         embed.add_field(
             name="❌Error", value="User not found.", inline=False)
 
@@ -60,39 +60,35 @@ async def lookup(ctx, arg):
         # Embed settings
         embed = discord.Embed(title="Lookup", color=0xf40b0b)
         embed.set_author(name="World To Build Bot",
-                         icon_url="https://github.com/toadpen/world-to-build-bot/blob/master/world-to-build-logo-main-300x300.png?raw=true")
-        embed.set_thumbnail(url=r['Data']['Headshot'])
+                         icon_url="https://cdn.discordapp.com/attachments/687762794661281864/943268414196178994/bubble-spirit-red.png")
+        embed.set_thumbnail(url=r['Data']['CharacterHeadshot'])
 
         # Embed fields
-        if r['Data']["UserName"] == None or r['Data']["UserName"] == "":
+        if r['Data']["Username"] == None or r['Data']["Username"] == "":
             embed.add_field(name="Username",
                             value="No Username", inline=False)
         else:
             embed.add_field(name="Username",
-                            value=r['Data']["UserName"], inline=False)
+                            value=r['Data']["Username"], inline=False)
 
-        if r['Data']["NickName"] == None or r['Data']["NickName"] == "":
+        if r['Data']["Nickname"] == None or r['Data']["Nickname"] == "":
             embed.add_field(name="Nickname",
                             value="No Nickname", inline=False)
         else:
             embed.add_field(name="Nickname",
-                            value=r['Data']["NickName"], inline=False)
+                            value=r['Data']["Nickname"], inline=False)
 
-        if r['Data']["Blurb"] == None or r['Data']["Blurb"] == "":
+        if r['Data']["About"] == None or r['Data']["About"] == "":
             embed.add_field(name="About", value="No About", inline=False)
         else:
             embed.add_field(
-                name="About", value=r['Data']["Blurb"], inline=False)
+                name="About", value=r['Data']["About"], inline=False)
 
-        if r['Data']["LastAccess"] == None or r['Data']["LastAccess"] == "":
-            embed.add_field(name="Last Online",
-                            value="Cannot find last online", inline=False)
+        if r['Data']["LastOnline"] == None or r['Data']["LastOnline"] == "":
+            embed.add_field(name="LastOnline", value="Cannot find Last Online", inline=False)
         else:
-
-            unixtime = int(r['Data']["LastAccess"])
-            normaltime = datetime.utcfromtimestamp(
-                unixtime).strftime('%Y-%m-%d %H:%M:%S')
-            embed.add_field(name="Last Online", value=normaltime, inline=False)
+            embed.add_field(
+                name="Last Online", value=r['Data']["LastOnline"], inline=False)
 
         embed.add_field(
             name="Link", value="https://worldtobuild.com/user/" + userid + "/profile", inline=False)
@@ -115,7 +111,7 @@ async def design(ctx, arg):
     if r["Success"] == False:
         embed = discord.Embed(title="Design", color=0xf40b0b)
         embed.set_author(name="World To Build Bot",
-                         icon_url="https://github.com/toadpen/world-to-build-bot/blob/master/world-to-build-logo-main-300x300.png?raw=true")
+                         icon_url="https://cdn.discordapp.com/attachments/687762794661281864/943268414196178994/bubble-spirit-red.png")
         embed.add_field(
             name="❌Error", value="Design not found.", inline=False)
         await ctx.reply(embed=embed)
@@ -126,7 +122,7 @@ async def design(ctx, arg):
         # Embed settings
         embed = discord.Embed(title="Design", color=0xf40b0b)
         embed.set_author(name="World To Build Bot",
-                         icon_url="https://github.com/toadpen/world-to-build-bot/blob/master/world-to-build-logo-main-300x300.png?raw=true")
+                         icon_url="https://cdn.discordapp.com/attachments/687762794661281864/943268414196178994/bubble-spirit-red.png")
 
         # Embed fields
         if r['Name'] == None or r['Name'] == "":
@@ -169,7 +165,7 @@ async def world(ctx, arg):
     if r["Success"] == False:
         embed = discord.Embed(title="World", color=0xf40b0b)
         embed.set_author(name="World To Build Bot",
-                         icon_url="https://github.com/toadpen/world-to-build-bot/blob/master/world-to-build-logo-main-300x300.png?raw=true",)
+                         icon_url="https://cdn.discordapp.com/attachments/687762794661281864/943268414196178994/bubble-spirit-red.png",)
         embed.add_field(
             name="❌Error", value="World not found.", inline=False)
 
@@ -182,7 +178,7 @@ async def world(ctx, arg):
         # Embed settings
         embed = discord.Embed(title="World", color=0xf40b0b)
         embed.set_author(name="World To Build Bot",
-                         icon_url="https://github.com/toadpen/world-to-build-bot/blob/master/world-to-build-logo-main-300x300.png?raw=true")
+                         icon_url="https://cdn.discordapp.com/attachments/687762794661281864/943268414196178994/bubble-spirit-red.png")
         embed.set_thumbnail(url=r['Data']['Thumbnail'])
 
         # Embed fields
@@ -209,7 +205,7 @@ async def world(ctx, arg):
                 'https://worldtobuild.com/api/user/FetchProfilePreview?UserID=' + str(r['Data']['OwnerId'])).json()
 
             embed.add_field(
-                name="Owner", value=req['Data']["UserName"], inline=False)
+                name="Owner", value=req['Data']["Username"], inline=False)
 
         if r['Data']["Visits"] == None or r['Data']["Visits"] == "":
             embed.add_field(name="Visits",
@@ -239,7 +235,7 @@ async def ping(ctx):
 
     embed = discord.Embed(title="Bot Latency", color=0xf40b0b)
     embed.set_author(name="World To Build Bot",
-                     icon_url="https://github.com/toadpen/world-to-build-bot/blob/master/world-to-build-logo-main-300x300.png?raw=true")
+                     icon_url="https://cdn.discordapp.com/attachments/687762794661281864/943268414196178994/bubble-spirit-red.png")
     embed.add_field(name="Ping", value=ping, inline=False)
     await ctx.reply(embed=embed)
 
@@ -274,9 +270,9 @@ async def serverinfo(ctx):
 async def _help(ctx):
     embed = discord.Embed(title="Help", color=0xf40b0b)
     embed.set_author(name="World To Build Bot",
-                     icon_url="https://github.com/toadpen/world-to-build-bot/blob/master/world-to-build-logo-main-300x300.png?raw=true")
+                     icon_url="https://cdn.discordapp.com/attachments/687762794661281864/943268414196178994/bubble-spirit-red.png")
     embed.add_field(
-        name="About", value="World To Build Bot is an unofficial WTB discord bot. There are currently 3 commands.", inline=False)
+        name="About", value="This is the official WorldToBuild Bot made by #Toad, and more!", inline=False)
 
     embed.add_field(
         name="wtb lookup (**USERID**)", value="Returns a users profile data.", inline=False)
@@ -297,7 +293,7 @@ async def _help(ctx):
         name="wtb serverinfo", value="Returns some information on the server.", inline=False)
 
     embed.add_field(
-        name="Github", value="https://github.com/toadpen/world-to-build-bot", inline=False)
+        name="GitHub", value="https://github.com/toadpen/world-to-build-bot", inline=False)
 
     # Reply with embed
     await ctx.reply(embed=embed)
