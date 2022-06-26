@@ -374,7 +374,7 @@ async def club(ctx, arg):
                             value=r['Data']['VerificationIcon'], inline=False)
 
         embed.add_field(
-            name="Link", value="https://worldtobuild.com/clubs/" + clubid, inline=False)
+            name="Link", value="https://worldtobuild.com/community/clubs/" + clubid, inline=False)
 
         # Reply with embed
         await ctx.reply(embed=embed)
