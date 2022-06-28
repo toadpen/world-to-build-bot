@@ -41,13 +41,13 @@ async def lookup(ctx, arg):
     userid = arg
     # Sends a request to the WTB API for a users profile data
     r = requests.get(
-        'https://worldtobuild.com/api/user/FetchProfilePreview?UserID=' + userid).json()
+        'https://api.worldtobuild.com/WebService/Player/FetchPlayerDataById?PlayerID=' + userid).json()
 
     # If the request was invalid
     if r["Success"] == False:
         embed = discord.Embed(title="Lookup", color=0xf40b0b)
         embed.set_author(name="World To Build Bot",
-                         icon_url="https://github.com/toadpen/world-to-build-bot/blob/master/world-to-build-logo-main-300x300.png?raw=true",)
+                         icon_url="https://cdn.discordapp.com/attachments/687762794661281864/943268414196178994/bubble-spirit-red.png",)
         embed.add_field(
             name="❌Error", value="User not found.", inline=False)
 
@@ -60,39 +60,54 @@ async def lookup(ctx, arg):
         # Embed settings
         embed = discord.Embed(title="Lookup", color=0xf40b0b)
         embed.set_author(name="World To Build Bot",
-                         icon_url="https://github.com/toadpen/world-to-build-bot/blob/master/world-to-build-logo-main-300x300.png?raw=true")
-        embed.set_thumbnail(url=r['Data']['Headshot'])
+                         icon_url="https://cdn.discordapp.com/attachments/687762794661281864/943268414196178994/bubble-spirit-red.png")
+        embed.set_thumbnail(url=r['Data']['CharacterHeadshot'])
 
         # Embed fields
-        if r['Data']["UserName"] == None or r['Data']["UserName"] == "":
+        if r['Data']["Username"] == None or r['Data']["Username"] == "":
             embed.add_field(name="Username",
                             value="No Username", inline=False)
         else:
             embed.add_field(name="Username",
-                            value=r['Data']["UserName"], inline=False)
+                            value=r['Data']["Username"], inline=False)
 
-        if r['Data']["NickName"] == None or r['Data']["NickName"] == "":
+        if r['Data']["Nickname"] == None or r['Data']["Nickname"] == "":
             embed.add_field(name="Nickname",
                             value="No Nickname", inline=False)
         else:
             embed.add_field(name="Nickname",
-                            value=r['Data']["NickName"], inline=False)
+                            value=r['Data']["Nickname"], inline=False)
 
-        if r['Data']["Blurb"] == None or r['Data']["Blurb"] == "":
+        if r['Data']["About"] == None or r['Data']["About"] == "":
             embed.add_field(name="About", value="No About", inline=False)
         else:
             embed.add_field(
-                name="About", value=r['Data']["Blurb"], inline=False)
+                name="About", value=r['Data']["About"], inline=False)
 
-        if r['Data']["LastAccess"] == None or r['Data']["LastAccess"] == "":
-            embed.add_field(name="Last Online",
-                            value="Cannot find last online", inline=False)
+        if r['Data']["RegisterDate"] == None or r['Data']["RegisterDate"] == "":
+            embed.add_field(name="RegisterDate",
+                            value="Error", inline=False)
         else:
+            embed.add_field(name="Register Date",
+                            value=r['Data']["RegisterDate"], inline=False)
 
-            unixtime = int(r['Data']["LastAccess"])
-            normaltime = datetime.utcfromtimestamp(
-                unixtime).strftime('%Y-%m-%d %H:%M:%S')
-            embed.add_field(name="Last Online", value=normaltime, inline=False)
+        if r['Data']["LastOnline"] == None or r['Data']["LastOnline"] == "":
+            embed.add_field(name="LastOnline", value="Cannot find Last Online", inline=False)
+        else:
+            embed.add_field(
+                name="Last Online", value=r['Data']["LastOnline"], inline=False)
+
+        if r['Data']["IsMembership"] == None or r['Data']["IsMembership"] == "":
+            embed.add_field(name="IsMembership", value="Cannot find Membership", inline=False)
+        else:
+            embed.add_field(
+                name="Membership", value=r['Data']["IsMembership"], inline=False)
+
+        if r['Data']["MembershipLevel"] == None or r['Data']["MembershipLevel"] == "":
+            embed.add_field(name="Membership Level", value="None", inline=False)
+        else:
+            embed.add_field(
+                name="Membership Level", value=r['Data']["MembershipLevel"], inline=False)
 
         embed.add_field(
             name="Link", value="https://worldtobuild.com/user/" + userid + "/profile", inline=False)
@@ -115,7 +130,7 @@ async def design(ctx, arg):
     if r["Success"] == False:
         embed = discord.Embed(title="Design", color=0xf40b0b)
         embed.set_author(name="World To Build Bot",
-                         icon_url="https://github.com/toadpen/world-to-build-bot/blob/master/world-to-build-logo-main-300x300.png?raw=true")
+                         icon_url="https://cdn.discordapp.com/attachments/687762794661281864/943268414196178994/bubble-spirit-red.png")
         embed.add_field(
             name="❌Error", value="Design not found.", inline=False)
         await ctx.reply(embed=embed)
@@ -126,7 +141,7 @@ async def design(ctx, arg):
         # Embed settings
         embed = discord.Embed(title="Design", color=0xf40b0b)
         embed.set_author(name="World To Build Bot",
-                         icon_url="https://github.com/toadpen/world-to-build-bot/blob/master/world-to-build-logo-main-300x300.png?raw=true")
+                         icon_url="https://cdn.discordapp.com/attachments/687762794661281864/943268414196178994/bubble-spirit-red.png")
 
         # Embed fields
         if r['Name'] == None or r['Name'] == "":
@@ -163,13 +178,13 @@ async def world(ctx, arg):
     gameid = arg
     # Sends a request to the WTB API for a worlds data
     r = requests.get(
-        'https://api.worldtobuild.com/GameService/FetchGameInformationById?GameId=' + gameid).json()
+        'https://api.worldtobuild.com/WebService/World/FetchWorldDataById?WorldID=' + gameid).json()
 
     # If the request was invalid
     if r["Success"] == False:
         embed = discord.Embed(title="World", color=0xf40b0b)
         embed.set_author(name="World To Build Bot",
-                         icon_url="https://github.com/toadpen/world-to-build-bot/blob/master/world-to-build-logo-main-300x300.png?raw=true",)
+                         icon_url="https://cdn.discordapp.com/attachments/687762794661281864/943268414196178994/bubble-spirit-red.png",)
         embed.add_field(
             name="❌Error", value="World not found.", inline=False)
 
@@ -182,8 +197,8 @@ async def world(ctx, arg):
         # Embed settings
         embed = discord.Embed(title="World", color=0xf40b0b)
         embed.set_author(name="World To Build Bot",
-                         icon_url="https://github.com/toadpen/world-to-build-bot/blob/master/world-to-build-logo-main-300x300.png?raw=true")
-        embed.set_thumbnail(url=r['Data']['Thumbnail'])
+                         icon_url="https://cdn.discordapp.com/attachments/687762794661281864/943268414196178994/bubble-spirit-red.png")
+        embed.set_thumbnail(url=r['Data']['Preview'])
 
         # Embed fields
 
@@ -194,39 +209,172 @@ async def world(ctx, arg):
             embed.add_field(name="Name",
                             value=r['Data']["Name"], inline=False)
 
-        if r['Data']["Description"] == None or r['Data']["Description"] == "":
-            embed.add_field(name="Description",
-                            value="No Description", inline=False)
+        if r['Data']["About"] == None or r['Data']["About"] == "":
+            embed.add_field(name="About",
+                            value="No About", inline=False)
         else:
-            embed.add_field(name="Description",
-                            value=str(r['Data']["Description"]), inline=False)
+            embed.add_field(name="About",
+                            value=str(r['Data']["About"]), inline=False)
 
-        if r['Data']["OwnerId"] == None or r['Data']["OwnerId"] == "":
+        if r['Data']["OwnerID"] == None or r['Data']["OwnerID"] == "":
             embed.add_field(name="Owner", value="No Owner", inline=False)
         else:
 
             req = requests.get(
-                'https://worldtobuild.com/api/user/FetchProfilePreview?UserID=' + str(r['Data']['OwnerId'])).json()
+                'https://worldtobuild.com/api/user/FetchProfilePreview?UserID=' + str(r['Data']['OwnerID'])).json()
 
-            embed.add_field(
-                name="Owner", value=req['Data']["UserName"], inline=False)
+        if r['Data']["OwnerUsername"] == None or r['Data']["OwnerUsername"] == "":
+            embed.add_field(name="Owner",
+                            value="No Owner", inline=False)
+        else:
+            embed.add_field(name="Owner",
+                            value=r['Data']['OwnerUsername'], inline=False)
 
-        if r['Data']["Visits"] == None or r['Data']["Visits"] == "":
-            embed.add_field(name="Visits",
+        if r['Data']["TotalPlays"] == None or r['Data']["TotalPlays"] == "":
+            embed.add_field(name="TotalPlays",
                             value="No Visits", inline=False)
         else:
-            embed.add_field(name="Visits",
-                            value=r['Data']['Visits'], inline=False)
+            embed.add_field(name="Total Plays",
+                            value=r['Data']['TotalPlays'], inline=False)
 
-        if r['Data']["MaxPlayers"] == None or r['Data']["MaxPlayers"] == "":
-            embed.add_field(name="Max Players",
-                            value="0", inline=False)
+        if r['Data']["CreationDate"] == None or r['Data']["CreationDate"] == "":
+            embed.add_field(name="Creation Date",
+                            value="No Creation Date", inline=False)
         else:
-            embed.add_field(name="Max Players",
-                            value=r['Data']['MaxPlayers'], inline=False)
+            embed.add_field(name="Creation Date",
+                            value=r['Data']['CreationDate'], inline=False)
+
+                            
+        if r['Data']["LastUpdated"] == None or r['Data']["LastUpdated"] == "":
+            embed.add_field(name="Last Updated",
+                            value="No Last Updated", inline=False)
+        else:
+            embed.add_field(name="Last Updated",
+                            value=r['Data']['LastUpdated'], inline=False)
+
+        if r['Data']["Public"] == None or r['Data']["Public"] == "":
+            embed.add_field(name="Public",
+                            value="No Public", inline=False)
+        else:
+            embed.add_field(name="Public",
+                            value=r['Data']['Public'], inline=False)
+
+        if r['Data']["AllowsComments"] == None or r['Data']["AllowsComments"] == "":
+            embed.add_field(name="AllowsComments",
+                            value="No Public", inline=False)
+        else:
+            embed.add_field(name="Comments Allowed",
+                            value=r['Data']['AllowsComments'], inline=False)
+
+        if r['Data']["Featured"] == None or r['Data']["Featured"] == "":
+            embed.add_field(name="Featured",
+                            value="No Feature", inline=False)
+        else:
+            embed.add_field(name="Featured",
+                            value=r['Data']['Featured'], inline=False)
 
         embed.add_field(
             name="Link", value="https://worldtobuild.com/worlds/" + gameid + "/play", inline=False)
+
+        # Reply with embed
+        await ctx.reply(embed=embed)
+
+
+        # Club command
+@bot.command()
+async def club(ctx, arg):
+    clubid = arg
+    # Sends a request to the WTB API for a worlds data
+    r = requests.get(
+        'https://api.worldtobuild.com/WebService/Club/FetchClubDataById?ClubID=' + clubid).json()
+
+    # If the request was invalid
+    if r["Success"] == False:
+        embed = discord.Embed(title="Clubs", color=0xf40b0b)
+        embed.set_author(name="World To Build Bot",
+                         icon_url="https://cdn.discordapp.com/attachments/687762794661281864/943268414196178994/bubble-spirit-red.png",)
+        embed.add_field(
+            name="❌Error", value="Club not found.", inline=False)
+
+        # Reply with embed
+        await ctx.reply(embed=embed)
+
+    # If the request was successful
+    elif r["Success"] == True:
+
+        # Embed settings
+        embed = discord.Embed(title="Clubs", color=0xf40b0b)
+        embed.set_author(name="World To Build Bot",
+                         icon_url="https://cdn.discordapp.com/attachments/687762794661281864/943268414196178994/bubble-spirit-red.png")
+        embed.set_thumbnail(url=r['Data']['Emblem'])
+
+        # Embed fields
+
+        if r['Data']["Name"] == None or r['Data']["Name"] == "":
+            embed.add_field(name="Name",
+                            value="No Name", inline=False)
+        else:
+            embed.add_field(name="Name",
+                            value=r['Data']["Name"], inline=False)
+
+        if r['Data']["About"] == None or r['Data']["About"] == "":
+            embed.add_field(name="About",
+                            value="No About", inline=False)
+        else:
+            embed.add_field(name="About",
+                            value=str(r['Data']["About"]), inline=False)
+
+        if r['Data']["OwnerID"] == None or r['Data']["OwnerID"] == "":
+            embed.add_field(name="Owner", value="Error", inline=False)
+        else:
+
+            req = requests.get(
+                'https://worldtobuild.com/api/user/FetchProfilePreview?UserID=' + str(r['Data']['OwnerID'])).json()
+
+        if r['Data']["CreationDate"] == None or r['Data']["CreationDate"] == "":
+            embed.add_field(name="CreationDate",
+                            value="No Creation Date", inline=False)
+        else:
+            embed.add_field(name="Creation Date",
+                            value=r['Data']['CreationDate'], inline=False)
+
+        if r['Data']["LastUpdated"] == None or r['Data']["LastUpdated"] == "":
+            embed.add_field(name="Last Updated",
+                            value="No Last Updated", inline=False)
+        else:
+            embed.add_field(name="Last Updated",
+                            value=r['Data']['LastUpdated'], inline=False)
+                            
+        if r['Data']["OwnerUsername"] == None or r['Data']["OwnerUsername"] == "":
+            embed.add_field(name="OwnerUsername",
+                            value="Error", inline=False)
+        else:
+            embed.add_field(name="Owner",
+                            value=r['Data']['OwnerUsername'], inline=False)
+
+        if r['Data']["MemberCount"] == None or r['Data']["MemberCount"] == "":
+            embed.add_field(name="MemberCount",
+                            value=r['Data']['MemberCount'], inline=False)
+        else:
+            embed.add_field(name="Members Count",
+                            value=r['Data']['MemberCount'], inline=False)
+
+        if r['Data']["JoinType"] == None or r['Data']["JoinType"] == "":
+            embed.add_field(name="JoinType",
+                            value=r['Data']['JoinType'], inline=False)
+        else:
+            embed.add_field(name="Join Type",
+                            value=r['Data']['JoinType'], inline=False)
+
+        if r['Data']["VerificationIcon"] == None or r['Data']["VerificationIcon"] == "":
+            embed.add_field(name="VerificationIcon",
+                            value=r['Data']['VerificationIcon'], inline=False)
+        else:
+            embed.add_field(name="Verified",
+                            value=r['Data']['VerificationIcon'], inline=False)
+
+        embed.add_field(
+            name="Link", value="https://worldtobuild.com/community/clubs/" + clubid, inline=False)
 
         # Reply with embed
         await ctx.reply(embed=embed)
@@ -239,7 +387,7 @@ async def ping(ctx):
 
     embed = discord.Embed(title="Bot Latency", color=0xf40b0b)
     embed.set_author(name="World To Build Bot",
-                     icon_url="https://github.com/toadpen/world-to-build-bot/blob/master/world-to-build-logo-main-300x300.png?raw=true")
+                     icon_url="https://cdn.discordapp.com/attachments/687762794661281864/943268414196178994/bubble-spirit-red.png")
     embed.add_field(name="Ping", value=ping, inline=False)
     await ctx.reply(embed=embed)
 
@@ -274,9 +422,9 @@ async def serverinfo(ctx):
 async def _help(ctx):
     embed = discord.Embed(title="Help", color=0xf40b0b)
     embed.set_author(name="World To Build Bot",
-                     icon_url="https://github.com/toadpen/world-to-build-bot/blob/master/world-to-build-logo-main-300x300.png?raw=true")
+                     icon_url="https://cdn.discordapp.com/attachments/687762794661281864/943268414196178994/bubble-spirit-red.png")
     embed.add_field(
-        name="About", value="World To Build Bot is an unofficial WTB discord bot. There are currently 3 commands.", inline=False)
+        name="About", value="This is the official WorldToBuild Bot made by #Toad, and more!", inline=False)
 
     embed.add_field(
         name="wtb lookup (**USERID**)", value="Returns a users profile data.", inline=False)
@@ -286,6 +434,9 @@ async def _help(ctx):
 
     embed.add_field(
         name="wtb world (**WORLDID**)", value="Returns a worlds data.", inline=False)
+        
+    embed.add_field(
+        name="wtb club (**CLUBID**)", value="Returns a clubs data.", inline=False)
 
     embed.add_field(
         name="wtb help", value="Returns some information about the bot.", inline=False)
@@ -297,7 +448,7 @@ async def _help(ctx):
         name="wtb serverinfo", value="Returns some information on the server.", inline=False)
 
     embed.add_field(
-        name="Github", value="https://github.com/toadpen/world-to-build-bot", inline=False)
+        name="GitHub", value="https://github.com/toadpen/world-to-build-bot", inline=False)
 
     # Reply with embed
     await ctx.reply(embed=embed)
